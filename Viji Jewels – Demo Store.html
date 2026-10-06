@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Viji Jewels – Demo Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4f8;--card:#fff;--ink:#1c1b2e;--mute:#6b6980;--line:#e1dde9;--gold:#a8802f;--gold-ink:#fff;--navy:#1d2547;--err:#b3261e;--ok:#1e7a4d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14131f;--card:#1e1d2e;--ink:#f1eef7;--mute:#a09db4;--line:#33314a;--gold:#d4a94f;--gold-ink:#1a1405;--navy:#2a3366;--err:#ff8a80;--ok:#6fd3a0}}
+:root[data-theme="dark"]{--bg:#14131f;--card:#1e1d2e;--ink:#f1eef7;--mute:#a09db4;--line:#33314a;--gold:#d4a94f;--gold-ink:#1a1405;--navy:#2a3366;--err:#ff8a80;--ok:#6fd3a0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Jost,system-ui,sans-serif;font-size:16px;line-height:1.5}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;margin:0}
+header{background:var(--navy);color:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.bar{max-width:1080px;margin:auto;padding:12px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:700;cursor:pointer;margin-right:auto;letter-spacing:.5px}
+.brand span{color:#e3bf6d}
+nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+nav button{background:none;border:0;color:#fff;font:inherit;padding:8px 12px;border-radius:8px;cursor:pointer}
+nav button:hover{background:rgba(255,255,255,.14)}
+nav .outline{border:1px solid #e3bf6d;color:#e3bf6d}
+.badge{background:#e3bf6d;color:#1a1405;border-radius:99px;padding:0 7px;font-size:13px;margin-left:4px}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+main{max-width:1080px;margin:auto;padding:24px 18px 60px}
+.hero{background:linear-gradient(120deg,var(--navy),#3a2a5e);color:#fff;border-radius:14px;padding:34px 28px;margin-bottom:26px}
+.hero h1{font-size:clamp(32px,6vw,52px);line-height:1.05}
+.hero p{max-width:46ch;color:#e4e0f2;margin:10px 0 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.prod .art{background:linear-gradient(160deg,#ece7f5,#f9f3e6);display:grid;place-items:center;padding:14px}
+:root[data-theme="dark"] .prod .art{background:linear-gradient(160deg,#272540,#2f2a24)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .prod .art{background:linear-gradient(160deg,#272540,#2f2a24)}}
+.prod .art svg{width:130px;height:130px}
+.prod .info{padding:14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.prod h3{font-size:22px}
+.cat{color:var(--mute);font-size:14px}
+.price{font-weight:600;font-size:18px}
+.btn{background:var(--gold);color:var(--gold-ink);border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.block{width:100%}
+.prod .btn{margin-top:auto}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;max-width:520px;margin:auto}
+.panel.wide{max-width:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+label{display:block;font-size:14px;font-weight:500;margin:12px 0 4px}
+input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.err{color:var(--err);font-size:14px;margin-top:10px;min-height:20px}
+.link{color:var(--gold);cursor:pointer;font-weight:600;background:none;border:0;font:inherit;padding:0}
+.cols{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;align-items:start}
+@media(max-width:800px){.cols{grid-template-columns:1fr}}
+.item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.item svg{width:64px;height:64px;background:var(--bg);border-radius:8px}
+.qty{display:inline-flex;align-items:center;gap:8px;margin-top:4px}
+.qty button{width:28px;height:28px;border-radius:7px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.sum div{display:flex;justify-content:space-between;padding:5px 0}
+.sum .tot{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-weight:600;font-size:19px}
+.pay{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:9px;padding:11px 12px;margin-top:8px;cursor:pointer;font-weight:500;margin-bottom:0}
+.pay input{width:auto}
+.ok{color:var(--ok)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:99px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}
+.toast.on{opacity:1}
+footer{text-align:center;color:var(--mute);font-size:14px;padding:20px}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.st{padding:3px 11px;border-radius:99px;border:1px solid var(--line);font-size:13px;color:var(--mute)}.st.on{background:var(--navy);color:#fff;border-color:var(--navy)}.st.dn{color:var(--ok);border-color:var(--ok)}.btns{display:flex;gap:10px;margin-top:18px}.btns .btn{flex:1}.prod .art svg{width:190px;height:190px}
+</style></head>
+<body>
+<header><div class="bar"><div class="brand" onclick="go('shop')">Viji <span>Jewels</span></div><nav id="nav"></nav></div></header>
+<main id="app"></main>
+<footer>Demo store only. No real payments are made and no data leaves your browser.</footer>
+<div class="toast" id="toast"></div>
+<script>
+const mem={};
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return k in mem?mem[k]:d}},
+set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){mem[k]=v}}};
+const P=[
+{id:1,n:"Solitaire Ring",c:"Rings",p:24999,t:"ring",m:"#d9b25f",g:"#e8f4ff"},
+{id:2,n:"Ruby Halo Ring",c:"Rings",p:32500,t:"ring",m:"#e2c27a",g:"#c2185b"},
+{id:3,pearl:1,n:"Pearl Drop Necklace",c:"Necklaces",p:18750,t:"neck",m:"#d9b25f",g:"#f5efe6"},
+{id:4,n:"Emerald Pendant",c:"Necklaces",p:28900,t:"neck",m:"#c9c9d1",g:"#1f9d6b"},
+{id:5,hoop:1,n:"Gold Hoop Earrings",c:"Earrings",p:9800,t:"ear",m:"#d9b25f",g:"#d9b25f"},
+{id:6,n:"Sapphire Studs",c:"Earrings",p:14200,t:"ear",m:"#c9c9d1",g:"#2f4fd0"},
+{id:7,n:"Rose Gold Bangle",c:"Bracelets",p:16400,t:"brace",m:"#e0a08c",g:"#e0a08c"},
+{id:8,tennis:1,n:"Diamond Tennis Bracelet",c:"Bracelets",p:45900,t:"brace",m:"#c9c9d1",g:"#eaf6ff"},
+{id:9,n:"Diamond Eternity Ring",c:"Rings",p:38800,t:"ring",m:"#c9c9d1",g:"#eaf6ff"},
+{id:10,n:"Blue Topaz Ring",c:"Rings",p:21500,t:"ring",m:"#d9b25f",g:"#3aa0e0"},
+{id:11,n:"Amethyst Pendant",c:"Necklaces",p:17900,t:"neck",m:"#c9c9d1",g:"#8e4fc9"},
+{id:12,n:"Citrine Gold Pendant",c:"Necklaces",p:15600,t:"neck",m:"#d9b25f",g:"#f0a920"},
+{id:13,n:"Ruby Drop Earrings",c:"Earrings",p:19900,t:"ear",m:"#d9b25f",g:"#c2185b"},
+{id:14,pearl:1,n:"Pearl Studs",c:"Earrings",p:8600,t:"ear",m:"#d9b25f",g:"#f5efe6"},
+{id:15,hoop:1,n:"Silver Hoop Earrings",c:"Earrings",p:7200,t:"ear",m:"#c9c9d1",g:"#c9c9d1"},
+{id:16,tennis:1,n:"Emerald Tennis Bracelet",c:"Bracelets",p:52900,t:"brace",m:"#d9b25f",g:"#1f9d6b"}];
+const sh=(h,a)=>"#"+[1,3,5].map(i=>Math.max(0,Math.min(255,parseInt(h.substr(i,2),16)+a)).toString(16).padStart(2,"0")).join("");
+function gem(c,x,y,r,id){const q=[...Array(8)].map((_,i)=>[x+r*Math.cos(i*Math.PI/4+Math.PI/8),y+r*Math.sin(i*Math.PI/4+Math.PI/8)]);
+return `<polygon points="${q.join(" ")}" fill="url(#e${id})" stroke="${sh(c,-80)}" stroke-width="1"/>`+q.map(a=>`<line x1="${x}" y1="${y}" x2="${a[0]}" y2="${a[1]}" stroke="#fff" stroke-opacity=".35"/>`).join("")+`<polygon points="${q.map(a=>[x+(a[0]-x)*.5,y+(a[1]-y)*.5]).join(" ")}" fill="#fff" fill-opacity=".22"/><circle cx="${x-r*.35}" cy="${y-r*.4}" r="${r*.16}" fill="#fff" fill-opacity=".9"/>`}
+function art(p){const i=p.id,m=p.m,g=p.g,M=`url(#m${i})`;
+let b=`<defs><linearGradient id="m${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${sh(m,70)}"/><stop offset=".35" stop-color="${m}"/><stop offset=".65" stop-color="${sh(m,-60)}"/><stop offset="1" stop-color="${sh(m,50)}"/></linearGradient><radialGradient id="e${i}" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="${sh(g,90)}"/><stop offset=".5" stop-color="${g}"/><stop offset="1" stop-color="${sh(g,-80)}"/></radialGradient><filter id="f${i}"><feGaussianBlur stdDeviation="4"/></filter></defs><ellipse cx="100" cy="176" rx="60" ry="8" fill="#000" opacity=".28" filter="url(#f${i})"/>`;
+const st=(x,y,r)=>p.pearl?`<circle cx="${x}" cy="${y}" r="${r}" fill="url(#e${i})"/><circle cx="${x-r*.35}" cy="${y-r*.4}" r="${r*.22}" fill="#fff" opacity=".85"/>`:gem(g,x,y,r,i);
+if(p.t=="ring")b+=`<ellipse cx="100" cy="120" rx="50" ry="52" fill="none" stroke="${M}" stroke-width="13"/><ellipse cx="100" cy="120" rx="44" ry="46" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><path d="M82 78 L118 78 L110 96 L90 96Z" fill="${M}"/>`+st(100,62,22);
+if(p.t=="neck"){const c="M20 20 Q100 150 180 20";b+=`<path d="${c}" fill="none" stroke="${M}" stroke-width="4"/><path d="${c}" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5" stroke-dasharray="3 5"/><circle cx="100" cy="88" r="5" fill="none" stroke="${M}" stroke-width="3"/><circle cx="100" cy="116" r="22" fill="none" stroke="${M}" stroke-width="5"/>`+st(100,116,17)}
+if(p.t=="ear")b+=[55,145].map(x=>p.hoop?`<circle cx="${x}" cy="92" r="30" fill="none" stroke="${M}" stroke-width="9"/><circle cx="${x}" cy="92" r="26" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>`:`<line x1="${x}" y1="28" x2="${x}" y2="62" stroke="${M}" stroke-width="4"/><circle cx="${x}" cy="68" r="8" fill="${M}"/>`+st(x,100,20)).join("");
+if(p.t=="brace"){if(p.tennis){b+=`<ellipse cx="100" cy="102" rx="68" ry="34" fill="none" stroke="${M}" stroke-width="9"/>`+[...Array(12)].map((_,k)=>{const a=k*Math.PI/6;return gem(g,100+68*Math.cos(a),102+34*Math.sin(a),8,i)}).join("")}
+else b+=`<ellipse cx="100" cy="104" rx="70" ry="34" fill="none" stroke="${M}" stroke-width="17"/><ellipse cx="100" cy="99" rx="68" ry="30" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3"/>`}
+return `<svg viewBox="0 0 200 200" role="img" aria-label="${p.n}">${b}</svg>`}
+const stepper=(a,c)=>`<div class="steps">${a.map((x,i)=>`<span class="st ${i==c?"on":i<c?"dn":""}">${i<c?"✓ ":""}${x}</span>`).join("")}</div>`;
+const money=n=>"₹"+n.toLocaleString("en-IN");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let view="shop",cart=store.get("jw_cart",{}),user=store.get("jw_user",null),last=null,after=null;
+const $=id=>document.getElementById(id);
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),1800)}
+function count(){return Object.values(cart).reduce((a,b)=>a+b,0)}
+function go(v){view=v;render();window.scrollTo(0,0)}
+function nav(){$("nav").innerHTML=`<button onclick="go('shop')">Shop</button><button onclick="go('cart')">Cart<span class="badge">${count()}</span></button>`+
+(user?`<button disabled style="opacity:.85">Hi, ${esc(user.first)}</button><button class="outline" onclick="logout()">Logout</button>`:`<button onclick="go('login')">Login</button><button class="outline" onclick="go('register')">Register</button>`)}
+function add(id){cart[id]=(cart[id]||0)+1;store.set("jw_cart",cart);nav();toast("Added to cart")}
+function chg(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];store.set("jw_cart",cart);render()}
+function totals(){let s=0;for(const id in cart)s+=P.find(p=>p.id==id).p*cart[id];const sh=s==0?0:DL=="Express"?500:s>=50000?0:250;return{s,sh,t:s+sh}}
+function logout(){user=null;store.set("jw_user",null);toast("Logged out");go("shop")}
+function shop(){return `<div class="hero"><h1>Fine jewellery, made to be kept.</h1><p>Rings, necklaces, earrings and bracelets in gold, silver and rose gold. Free shipping above ₹50,000.</p></div>
+<div class="grid">${P.map(p=>`<div class="prod"><div class="art">${art(p)}</div><div class="info"><span class="cat">${p.c}</span><h3>${p.n}</h3><span class="price">${money(p.p)}</span><button class="btn" onclick="add(${p.id})">Add to cart</button></div></div>`).join("")}</div>`}
+let rs=0,R={},cs=0,SH={},DL="Standard";
+const RS=["Name","Gender","Email","Password","Review"];
+function register(){let h;
+if(rs==0)h=`<label for="fn">First name</label><input id="fn" value="${esc(R.f||"")}" autocomplete="given-name"><label for="ln">Last name</label><input id="ln" value="${esc(R.l||"")}" autocomplete="family-name">`;
+if(rs==1)h="<p>Select your gender</p>"+["Female","Male","Other","Prefer not to say"].map(x=>`<label class="pay"><input type="radio" name="gd" value="${x}" ${R.g==x?"checked":""}> ${x}</label>`).join("");
+if(rs==2)h=`<label for="em">Email address</label><input id="em" type="email" value="${esc(R.e||"")}" autocomplete="email"><p class="cat">You'll use this to log in.</p>`;
+if(rs==3)h=`<label for="pw">Password</label><input id="pw" type="password" autocomplete="new-password"><label for="cp">Confirm password</label><input id="cp" type="password" autocomplete="new-password"><p class="cat">At least 6 characters.</p>`;
+if(rs==4)h=`<div class="sum"><div><span>Name</span><span>${esc(R.f+" "+R.l)}</span></div><div><span>Gender</span><span>${esc(R.g)}</span></div><div><span>Email</span><span>${esc(R.e)}</span></div><div><span>Password</span><span>••••••</span></div></div>`;
+return `<div class="panel"><h2>Create your account</h2>${stepper(RS,rs)}${h}<div class="err" id="e" role="alert"></div><div class="btns">${rs?`<button class="btn sec" onclick="regBack()">Back</button>`:""}<button class="btn" onclick="regNext()">${rs==4?"Create account":"Next"}</button></div><p>Already registered? <button class="link" onclick="go('login')">Log in</button></p></div>`}
+function regNext(){const v=i=>$(i).value.trim(),e=m=>{$("e").textContent=m};
+if(rs==0){if(!v("fn")||!v("ln"))return e("Enter your first and last name.");R.f=v("fn");R.l=v("ln")}
+if(rs==1){const c=document.querySelector("input[name=gd]:checked");if(!c)return e("Select an option.");R.g=c.value}
+if(rs==2){const em=v("em").toLowerCase();if(!/^\S+@\S+\.\S+$/.test(em))return e("Enter a valid email address.");if(store.get("jw_users",[]).some(u=>u.email==em))return e("This email is already registered. Log in instead.");R.e=em}
+if(rs==3){const pw=$("pw").value;if(pw.length<6)return e("Password must be at least 6 characters.");if(pw!==$("cp").value)return e("Passwords don't match.");R.pw=pw}
+if(rs==4){const us=store.get("jw_users",[]),u={first:R.f,last:R.l,gender:R.g,email:R.e,pw:R.pw};us.push(u);store.set("jw_users",us);user=u;store.set("jw_user",u);R={};rs=0;toast("Account created");go(after||"shop");after=null;return}
+rs++;render()}
+function regBack(){rs--;render()}
+function login(){return `<div class="panel"><h2>Log in</h2><label for="le">Email</label><input id="le" type="email" autocomplete="email"><label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password">
+<div class="err" id="e" role="alert"></div><button class="btn block" onclick="doLogin()">Login</button>
+<p>New here? <button class="link" onclick="go('register')">Create an account</button></p></div>`}
+function doLogin(){const em=$("le").value.trim().toLowerCase(),pw=$("lp").value;
+const u=store.get("jw_users",[]).find(u=>u.email==em&&u.pw==pw);
+if(!u)return $("e").textContent="Email or password is incorrect.";
+user=u;store.set("jw_user",u);toast("Welcome back, "+u.first);go(after||"shop");after=null}
+function cartV(){const ids=Object.keys(cart);if(!ids.length)return `<div class="panel"><h2>Your cart is empty</h2><p>Add a piece you love to get started.</p><button class="btn" onclick="go('shop')">Browse jewellery</button></div>`;
+const t=totals();return `<h2>Shopping cart</h2><div class="cols"><div class="panel wide">${ids.map(id=>{const p=P.find(x=>x.id==id);return `<div class="item">${art(p)}<div><strong>${p.n}</strong><div class="cat">${money(p.p)} each</div><div class="qty"><button aria-label="Decrease" onclick="chg(${id},-1)">−</button>${cart[id]}<button aria-label="Increase" onclick="chg(${id},1)">+</button></div></div><strong>${money(p.p*cart[id])}</strong></div>`}).join("")}</div>
+<div class="panel wide sum"><div><span>Subtotal</span><span>${money(t.s)}</span></div><div><span>Shipping</span><span>${t.sh?money(t.sh):"Free"}</span></div><div class="tot"><span>Total</span><span>${money(t.t)}</span></div><button class="btn block" onclick="checkout()">Proceed to checkout</button></div></div>`}
+function checkout(){if(!count())return;cs=0;if(!user){after="checkout";toast("Log in to check out");return go("login")}go("checkout")}
+const CS=["Contact","Address","Delivery","Payment"];
+function sumV(){const t=totals();return `<h3>Order summary</h3>`+Object.keys(cart).map(id=>{const p=P.find(x=>x.id==id);return `<div><span>${p.n} × ${cart[id]}</span><span>${money(p.p*cart[id])}</span></div>`}).join("")+`<div style="border-top:1px solid var(--line);margin-top:6px"><span>${DL} shipping</span><span>${t.sh?money(t.sh):"Free"}</span></div><div class="tot"><span>Total</span><span>${money(t.t)}</span></div>`}
+function checkoutV(){const t=totals();let h;
+if(cs==0)h=`<label for="sn">Full name</label><input id="sn" value="${esc(SH.name??(user.first+" "+user.last))}"><label for="sp">Mobile number</label><input id="sp" type="tel" value="${esc(SH.phone||"")}" autocomplete="tel"><label for="sm">Email for order updates</label><input id="sm" type="email" value="${esc(SH.mail??user.email)}">`;
+if(cs==1)h=`<label for="s1">Address line 1</label><input id="s1" value="${esc(SH.a1||"")}" autocomplete="address-line1"><label for="s2">Address line 2 (optional)</label><input id="s2" value="${esc(SH.a2||"")}"><div class="row"><div><label for="sc">City</label><input id="sc" value="${esc(SH.city||"")}"></div><div><label for="ss">State</label><input id="ss" value="${esc(SH.state||"")}"></div></div><label for="sz">PIN / ZIP code</label><input id="sz" inputmode="numeric" value="${esc(SH.pin||"")}">`;
+if(cs==2)h="<p>Choose a delivery speed</p>"+[["Standard","5–7 days",t.s>=50000?"Free":money(250)],["Express","1–2 days",money(500)]].map(x=>`<label class="pay"><input type="radio" name="dl" value="${x[0]}" ${DL==x[0]?"checked":""} onchange="DL=this.value;$('sumbox').innerHTML=sumV()"> ${x[0]}, ${x[1]}<b style="margin-left:auto">${x[2]}</b></label>`).join("")+`<label for="gn">Gift message (optional)</label><input id="gn" maxlength="80" value="${esc(SH.gift||"")}">`;
+if(cs==3)h=`<p class="cat">Delivering to ${esc(SH.name)}, ${esc(SH.a1)}, ${esc(SH.city)} ${esc(SH.pin)} (${DL})</p><label class="pay"><input type="radio" name="pm" value="Cash on Delivery" checked onchange="pm()"> Cash on Delivery (COD)</label><label class="pay"><input type="radio" name="pm" value="Credit Card" onchange="pm()"> Credit card</label><label class="pay"><input type="radio" name="pm" value="Debit Card" onchange="pm()"> Debit card</label>
+<div id="card" hidden><label for="cn">Card number</label><input id="cn" inputmode="numeric" placeholder="1234 5678 9012 3456" maxlength="19"><label for="ch">Name on card</label><input id="ch"><div class="row"><div><label for="cx">Expiry (MM/YY)</label><input id="cx" placeholder="08/29" maxlength="5"></div><div><label for="cv">CVV</label><input id="cv" inputmode="numeric" maxlength="4" type="password"></div></div></div>`;
+return `<h2>Checkout</h2><div class="cols"><div class="panel wide">${stepper(CS,cs)}${h}<div class="err" id="e" role="alert"></div><div class="btns">${cs?`<button class="btn sec" onclick="coBack()">Back</button>`:`<button class="btn sec" onclick="go('cart')">Cart</button>`}<button class="btn" onclick="${cs==3?"confirmOrder()":"coNext()"}">${cs==3?"Confirm order":"Next"}</button></div></div><div class="panel wide sum" id="sumbox">${sumV()}</div></div>`}
+function pm(){$("card").hidden=document.querySelector('input[name=pm]:checked').value=="Cash on Delivery"}
+function coBack(){cs--;render()}
+function coNext(){const v=i=>$(i).value.trim(),e=m=>{$("e").textContent=m};
+if(cs==0){if(!v("sn"))return e("Enter the recipient's name.");if(v("sp").replace(/\D/g,"").length<10)return e("Enter a valid 10-digit mobile number.");if(!/^\S+@\S+\.\S+$/.test(v("sm")))return e("Enter a valid email address.");SH.name=v("sn");SH.phone=v("sp");SH.mail=v("sm")}
+if(cs==1){if(!v("s1")||!v("sc")||!v("ss"))return e("Fill in address line 1, city and state.");if(!/^\d{5,6}$/.test(v("sz")))return e("Enter a 5 or 6 digit PIN / ZIP code.");SH.a1=v("s1");SH.a2=v("s2");SH.city=v("sc");SH.state=v("ss");SH.pin=v("sz")}
+if(cs==2)SH.gift=v("gn");
+cs++;render()}
+function confirmOrder(){const v=i=>$(i).value.trim(),e=m=>{$("e").textContent=m};
+const m=document.querySelector('input[name=pm]:checked').value;let tail="";
+if(m!="Cash on Delivery"){const n=v("cn").replace(/\s/g,"");
+if(!/^\d{16}$/.test(n))return e("Card number must be 16 digits.");
+if(!v("ch"))return e("Enter the name on the card.");
+const x=v("cx").match(/^(0[1-9]|1[0-2])\/(\d\d)$/);if(!x)return e("Enter expiry as MM/YY.");
+if(2000+ +x[2]<2026||(2000+ +x[2]==2026&&+x[1]<10))return e("This card has expired.");
+if(!/^\d{3,4}$/.test(v("cv")))return e("CVV must be 3 or 4 digits.");
+tail=" ending "+n.slice(-4)}
+const t=totals();last={id:"VJ"+Date.now().toString().slice(-8),items:Object.keys(cart).map(id=>({p:P.find(x=>x.id==id),q:cart[id]})),sh:{name:SH.name,phone:SH.phone,addr:[SH.a1,SH.a2].filter(Boolean).join(", "),city:SH.city,state:SH.state,pin:SH.pin},dl:DL,gift:SH.gift,m:m+tail,t};
+cart={};store.set("jw_cart",cart);cs=0;SH={};DL="Standard";go("done")}
+function done(){const o=last;if(!o)return shop();return `<div class="panel"><h2 class="ok">Order confirmed</h2><p>Thank you, ${esc(user?user.first:"")}. Your order <strong>${o.id}</strong> is placed.</p>
+${o.items.map(i=>`<div class="sum"><div><span>${i.p.n} × ${i.q}</span><span>${money(i.p.p*i.q)}</span></div></div>`).join("")}
+<div class="sum"><div class="tot"><span>Total</span><span>${money(o.t.t)}</span></div></div>
+<p><strong>Delivery:</strong> ${o.dl}${o.gift?" · Gift message: "+esc(o.gift):""}</p><p><strong>Payment:</strong> ${esc(o.m)}${o.m.startsWith("Cash")?" – pay when it arrives":""}</p>
+<p><strong>Ships to:</strong> ${esc(o.sh.name)}, ${esc(o.sh.addr)}, ${esc(o.sh.city)}, ${esc(o.sh.state)} ${esc(o.sh.pin)}<br>Phone: ${esc(o.sh.phone)}</p>
+<button class="btn" onclick="go('shop')">Continue shopping</button></div>`}
+function render(){nav();if((view=="checkout")&&!user){view="login"}
+const V={shop,register,login,cart:cartV,checkout:checkoutV,done};$("app").innerHTML=V[view]();}
+render();
+</script></body></html>
